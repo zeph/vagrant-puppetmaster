@@ -1,15 +1,15 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.configure("2") do |config|
+Vagrant::Config.run do |config|
   config.vm.define :master do |master_config|
 
       # All Vagrant configuration is done here. The most common configuration
       # options are documented and commented below. For a complete reference,
       # please see the online documentation at vagrantup.com.
-      master_config.vm.hostname = "puppet.grahamgilbert.dev"
+      master_config.vm.host_name = "puppet.grahamgilbert.dev"
       # Every Vagrant virtual environment requires a box to build off of.
-      master_config.vm.box = "precise64"
+      master_config.vm.box = "ubuntu"
     
       # The url from where the 'master_config.vm.box' box will be fetched if it
       # doesn't already exist on the user's system.
@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
       # via the IP. Host-only networks can talk to the host machine as well as
       # any other machines on the same network, but cannot be accessed (through this
       # network interface) by any external networks.
-      master_config.vm.network :private_network, ip: "192.168.33.10"
+      master_config.vm.network :hostonly, "192.168.33.10"
         
       # Share an additional folder to the guest VM. The first argument is
       # an identifier, the second is the path on the guest to mount the
@@ -32,10 +32,8 @@ Vagrant.configure("2") do |config|
       # Enable the Puppet provisioner
       master_config.vm.provision :puppet, :module_path => "VagrantConf/modules", :manifests_path => "VagrantConf/manifests", :manifest_file  => "default.pp"
 
-    master_config.vm.synced_folder "puppet/manifests", "/etc/puppet/manifests"
-    master_config.vm.synced_folder "puppet/modules", "/etc/puppet/modules"
-    master_config.vm.synced_folder "puppet/hieradata", "/etc/puppet/hieradata"
+      master_config.vm.share_folder "manifests", "/etc/puppet/manifests", "puppet/manifests"
+      master_config.vm.share_folder "modules", "/etc/puppet/modules", "puppet/modules"
+      master_config.vm.share_folder "hieradata", "/etc/puppet/hieradata", "puppet/hieradata"
   end
-  
-  
 end
