@@ -7,13 +7,13 @@ Vagrant::Config.run do |config|
       # All Vagrant configuration is done here. The most common configuration
       # options are documented and commented below. For a complete reference,
       # please see the online documentation at vagrantup.com.
-      master_config.vm.host_name = "puppet.grahamgilbert.dev"
+      master_config.vm.host_name = "master.local"
       # Every Vagrant virtual environment requires a box to build off of.
-      master_config.vm.box = "ubuntu_precise64"
+      master_config.vm.box = "squeeze64_puppet27"
     
       # The url from where the 'master_config.vm.box' box will be fetched if it
       # doesn't already exist on the user's system.
-      master_config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+      ##master_config.vm.box_url = "http://files.vagrantup.com/precise64.box"
       
       # If you're using VMWare Fusion rather than Virtualbox, you'll want to use this box_url instead
       # master_config.vm.box_url = "http://files.vagrantup.com/precise64_vmware_fusion.box"
@@ -29,7 +29,7 @@ Vagrant::Config.run do |config|
       # an identifier, the second is the path on the guest to mount the
       # folder, and the third is the path on the host to the actual folder.
       
-      master_config.vm.provision :shell, :path => "puppet_master.sh"
+      ##master_config.vm.provision :shell, :path => "puppet_master.sh"
       # Enable the Puppet provisioner
       master_config.vm.provision :puppet, :module_path => "VagrantConf/modules", :manifests_path => "VagrantConf/manifests", :manifest_file  => "default.pp"
 
