@@ -2,7 +2,7 @@
 
 node default {
   
-  host { 'puppet':
+  host { 'puppet.rocket.local':
     ensure       => 'present',
     host_aliases => ['puppet'],
     ip           => '192.168.33.10',
@@ -12,7 +12,7 @@ node default {
   
   package {'puppetmaster':
     ensure  =>  latest,
-    require => Host['puppet'],
+    require => Host['puppet.rocket.local'],
   }
     
   # Configure puppetdb and its underlying database

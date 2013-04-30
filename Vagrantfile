@@ -7,7 +7,7 @@ Vagrant::Config.run do |config|
       # All Vagrant configuration is done here. The most common configuration
       # options are documented and commented below. For a complete reference,
       # please see the online documentation at vagrantup.com.
-      master_config.vm.host_name = "master.local"
+      master_config.vm.host_name = "puppet.rocket.local"
       # Every Vagrant virtual environment requires a box to build off of.
       master_config.vm.box = "squeeze64_puppet27"
     
@@ -29,7 +29,7 @@ Vagrant::Config.run do |config|
       # an identifier, the second is the path on the guest to mount the
       # folder, and the third is the path on the host to the actual folder.
       
-      ##master_config.vm.provision :shell, :path => "puppet_master.sh"
+      master_config.vm.provision :shell, :path => "puppet_master.sh"
       # Enable the Puppet provisioner
       master_config.vm.provision :puppet, :module_path => "VagrantConf/modules", :manifests_path => "VagrantConf/manifests", :manifest_file  => "default.pp"
 
